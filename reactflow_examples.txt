@@ -1,0 +1,1572 @@
+The following text is a Git repository with code. The structure of the text are sections that begin with ----, followed by a single line containing the file path and file name, followed by a variable amount of lines containing the file contents. The text representing the Git repository ends when the symbols --END-- are encounted. Any further text beyond --END-- are meant to be interpreted as instructions using the aforementioned Git repository as context.
+----
+_meta.json
+{
+  "*": {
+    "theme": {
+      "toc": false
+    }
+  },
+  "index": {
+    "title": "Examples",
+    "theme": {
+      "breadcrumb": false
+    }
+  },
+  "overview": "Feature Overview",
+  "nodes": "Nodes",
+  "edges": "Edges",
+  "layout": "Layout",
+  "interaction": "Interaction",
+  "styling": "Styling",
+  "misc": "Misc"
+}
+
+----
+overview.mdx
+---
+title: Feature Overview
+description: The most used features of React Flow - controls, MiniMap, node types, edge types, edge labels, and custom styling.
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This is an overview example of what's possible with React Flow. Below you can see features like: built-in node and edge types, [sub flows](/learn/advanced-usage/sub-flows), [`NodeToolbar`](/api-reference/components/node-toolbar), [`NodeResizer`](/api-reference/components/node-resizer) components. On the bottom you see the [Controls](/api-reference/components/controls) and the [MiniMap](/api-reference/components/minimap) components.
+
+<ExampleViewer
+  codePath="example-flows/Overview"
+  additionalFiles={[
+    'initial-elements.jsx',
+    'AnnotationNode.jsx',
+    'ToolbarNode.jsx',
+    'ResizerNode.jsx',
+    'TextNode.jsx',
+    'CircleNode.jsx',
+    'ButtonEdge.jsx',
+    'overview.css',
+  ]}
+  orientation="vertical"
+/>
+
+</ExampleLayout>
+
+----
+index.mdx
+---
+title: Examples
+description: Overview of React Flow examples for practical copy-paste solutions to common use cases.
+---
+
+import ExamplesOverviewPage from '@/sites/examples/overview';
+
+# Examples
+
+Browse our examples for practical copy-paste solutions to common use cases
+with React Flow. Here you can find our MIT Licensed examples, which you are
+free to use in your projects without restrictions, as well as our Pro examples
+that come with our React Flow Pro subscription plans.
+
+<ExamplesOverviewPage />
+
+----
+misc/_meta.json
+{
+  "download-image": "Download Image",
+  "provider": "ReactFlowProvider",
+  "use-react-flow-hook": "useReactFlow"
+}
+
+----
+misc/use-react-flow-hook.mdx
+---
+title: useReactFlow
+description: A hook with useful helpers for your nodes, edges, and the viewport
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example illustrates how to use the [`useReactFlow` hook](/api-reference/hooks/use-react-flow). It comes with a lot of useful helpers to update your nodes and edges or adjust the viewport of your diagram. The hook returns a [`ReactFlow instance`](/api-reference/types/react-flow-instance).
+
+<ExampleViewer
+  codePath="example-flows/UseReactFlowHook"
+  additionalFiles={['Buttons.jsx']}
+  activeFile="Buttons.jsx"
+/>
+</ExampleLayout>
+
+----
+misc/provider.mdx
+---
+title: ReactFlowProvider
+description: For working with multiple flows on a page, so that each has a separate store instance
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+If you are working with multiple flows on a page or if you are using a client side router you need to wrap each flow with a [`ReactFlowProvider`](/api-reference/react-flow-provider) so that every flow has its own store instance.
+Using a `ReactFlowProvider` is also mandatory if you want to access the internal state outside of the `ReactFlow` component.
+
+<ExampleViewer
+  codePath="example-flows/Provider"
+  additionalFiles={['Sidebar.jsx', 'index.css']}
+/>
+</ExampleLayout>
+
+----
+misc/download-image.mdx
+---
+title: Download Image
+description: Save a flow as a png with the html-to-image library
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import DownloadImageExample from '@/components/example-viewer/example-flows/DownloadImage';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to download a flow as an image with [html-to-image](https://github.com/bubkoo/html-to-image).
+
+<ExampleViewer
+  codePath="example-flows/DownloadImage"
+  dependencies={{ 'html-to-image': 'latest' }}
+  additionalFiles={[
+    'CustomNode.jsx',
+    'nodes-edges.js',
+    'DownloadButton.jsx',
+    'index.css',
+  ]}
+  customPreview={<DownloadImageExample />}
+  activeFile="DownloadButton.jsx"
+/>
+</ExampleLayout>
+
+----
+nodes/_meta.json
+{
+  "custom-node": "Custom Nodes",
+  "update-node": "Updating Nodes",
+  "stress": "Stress Test",
+  "hidden": "Hidden",
+  "drag-handle": "Drag Handle",
+  "easy-connect": "Easy Connect",
+  "add-node-on-edge-drop": "Add Node On Edge Drop",
+  "proximity-connect": "Proximity Connect",
+  "node-resizer": "Node Resizer",
+  "node-toolbar": "Node Toolbar",
+  "resize-rotate": "Resize and Rotate",
+  "dynamic-grouping": "Dynamic Grouping",
+  "intersections": "Intersections",
+  "shapes": "Shapes",
+  "connection-limit": "Connection Limit",
+  "delete-middle-node": "Delete Middle Node"
+}
+
+----
+nodes/hidden.mdx
+---
+title: Hidden
+description: Hide a node or edge for expandable/collapsible diagrams
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Nodes and edges can be hidden by using the [`hidden` attribute](/api-reference/types/node). This can be used for implementing expandable/collapsible diagrams.
+
+<ExampleViewer codePath="example-flows/Hidden" />
+</ExampleLayout>
+
+----
+nodes/delete-middle-node.mdx
+---
+title: Delete Middle Node
+description: Remove a node without breaking the flow
+---
+
+import { Callout, Cards, Card } from 'nextra/components';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows you how to recover deleted edges when you remove a node from the
+middle of a chain. In other words, if we have three nodes connected in sequence -
+`a->b->c` - and we deleted the middle node `b`, this example shows you how to end
+up with the graph `a->c`.
+
+To achieve this, we need to make use of a few bits:
+
+- The [`onNodesDelete`](/api-reference/react-flow#event-onnodesdelete) callback lets
+  us know when a node is deleted.
+- [`getConnectedEdges`](/api-reference/utils/get-connected-edges) gives us
+  all the edges connected to a node, either as source or target.
+- [`getIncomers`](/api-reference/utils/get-incomers) and
+  [`getOutgoers`](/api-reference/utils/get-outgoers) give us the nodes
+  connected to a node as source or target.
+
+All together, this allows us to take all the nodes connected to the deleted
+node, and reconnect them to any nodes the deleted node was connected to.
+
+<ExampleViewer codePath="example-flows/DeleteMiddleNode" />
+
+Although this example is less than 20 lines of code there's quite a lot to digest.
+Let's break some of it down:
+
+- Our `onNodesDelete` callback is called with one argument - `deleted` - that is an
+  array of every node that was just deleted. If you select an individual node and
+  press the delete key, `deleted` will contain just that node, but if you make a
+  selection _all_ the nodes in that selection will be in `deleted`.
+
+- We create a new array of edges - `remainingEdges` - that contains all the edges
+  in the flow that have nothing to do with the node(s) we just deleted.
+
+- We create another array of edges by _flatMapping_ over the array of `incomers`.
+  These are nodes that were connected to the deleted node as a source. For each
+  of these nodes, we create a new edge that connects to each node in the array of
+  `outgoers`. These are nodes that were connected to the deleted node as a target.
+
+<Callout type="info">
+For brevity, we're using object destructuring while at the same time renaming
+the variable bound (e.g. `({ id: source }) => ...)` destructures the `id`
+property of the object and binds it to a new variable called `source`) but you
+don't need to do this
+</Callout>
+
+## Quick Reference
+
+<Cards num={2}>
+  <Card
+    title="getConnectedEdges"
+    href="/api-reference/utils/getConnectedEdges"
+  />
+  <Card title="getIncomers" href="/api-reference/utils/getIncomers" />
+  <Card
+    title="Array.prototype.flatMap"
+    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap"
+    icon={<ArrowTopRightOnSquareIcon />}
+  />
+  <Card
+    title="Destructuring assignment"
+    href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#assigning_to_new_variable_names"
+    icon={<ArrowTopRightOnSquareIcon />}
+  />
+</Cards>
+
+</ExampleLayout>
+
+----
+nodes/proximity-connect.mdx
+---
+title: Proximity Connect
+description: Automatically create edges when nodes get close to each other
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to automatically create edges when a node is dropped in close proximity to another one. While dragging, a dotted connection line is displayed to show which edge will be created if you drop the node.
+
+<ExampleViewer
+  codePath="example-flows/ProximityConnect"
+  additionalFiles={['nodes-and-edges.js', 'style.css']}
+/>
+</ExampleLayout>
+
+----
+nodes/resize-rotate.mdx
+---
+title: Resize and Rotate
+description: Spin and scale nodes using the NodeResizer component
+---
+
+import { Callout } from 'nextra/components';
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to implement a [custom node](/learn/customization/custom-nodes)
+that can be resized and rotated using the [`<NodeResizer />`](/api-reference/components/node-resizer).
+component. It can be used as a starting point for building flow chart editors or
+diagrams where users can configure the size and rotation of the elements.
+
+<ExampleViewer
+  codePath="example-flows/ResizeRotate"
+  additionalFiles={['ResizeRotateNode.jsx', 'nodes-edges.js', 'style.module.css']}
+/>
+</ExampleLayout>
+
+----
+nodes/intersections.mdx
+---
+title: Intersections
+description: Detect when a node overlaps with another node
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+The `useReactFlow` hook exports [helpers to check intersections](/api-reference/types/react-flow-instance#intersections) of nodes and areas. In this example you can drag a node and get a visual feedback when it intersects with another node.
+
+<ExampleViewer
+  codePath="example-flows/Intersection"
+  additionalFiles={['style.css']}
+  isTypescript
+/>
+</ExampleLayout>
+
+----
+nodes/shapes.mdx
+---
+title: Shapes
+description: Custom node that can render different shapes like a circle, diamond or hexagon that are commonly used in flow charts
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to implement a [custom node](/learn/customization/custom-nodes) that can render different shapes like a circle, diamond or hexagon that are commonly used in flow charts. It also shows how to implement a sidebar component, custom minimap nodes and a node toolbar to change the color of the shapes.
+
+<ProExampleViewer variant="dark" slug="shapes" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow)
+
+</ExampleLayout>
+
+----
+nodes/dynamic-grouping.mdx
+---
+title: Dynamic Grouping
+description: Group nodes together by dragging them into the same container
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to group nodes dynamically. You can drag a node from the sidebar or the pane to a group or select multiple nodes and use the "Group Nodes" button to group them.
+
+<ProExampleViewer variant="dark" slug="dynamic-grouping" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow), [@reactflow/node-resizer](https://www.npmjs.com/package/@reactflow/node-resizer)
+
+</ExampleLayout>
+
+----
+nodes/update-node.mdx
+---
+title: Updating Nodes
+description: Update the data field of a specific node
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+import { Callout } from 'nextra/components';
+
+<ExampleLayout>
+You can update properties of nodes and edges freely as long as you pass a newly created `nodes` or `edges` array to `ReactFlow`.
+
+{' '}
+
+<Callout type="info">
+  You have to create a new `data` object on a node to notify React Flow about
+  data changes.
+</Callout>
+<br />
+
+<ExampleViewer
+  codePath="example-flows/UpdateNode"
+  additionalFiles={['updatenode.css']}
+/>
+</ExampleLayout>
+
+----
+nodes/node-toolbar.mdx
+---
+title: Node Toolbar
+description: A toolbar with buttons appears next to the selected node
+created_at: 2024-01-18
+---
+
+import { Callout } from 'nextra/components';
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+For many types of applications, having a toolbar or set of controls appear when
+a node is selected can be quite useful. It's so useful, in fact, that we've built
+the [`<NodeToolbar />`](/api-reference/components/node-toolbar) component to make
+it easy to add this functionality to your custom nodes!
+
+<Callout type="info">
+  Content in the toolbar is not scaled as you zoom your flow in and out: this
+  means it should always be visible.
+</Callout>
+
+<ExampleViewer codePath="example-flows/NodeToolbar" />
+
+For more information on the `<NodeToolbar />` component and its props, check out
+the [API reference](/api-reference/components/node-toolbar).
+
+</ExampleLayout>
+
+----
+nodes/node-resizer.mdx
+---
+title: Node Resizer
+created_at: 2024-01-11
+description: Change the size of a node with a bounding box or draggable icon
+---
+
+import { Callout } from 'nextra/components';
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+The [`<NodeResizer />`](/api-reference/components/node-resizer) component can be used to add a resize UI for a custom node. The `reactflow` package also exports a `<NodeResizeControl />` component for implementing a custom resizing UI as shown in this example.
+
+<ExampleViewer
+  codePath="example-flows/NodeResizer"
+  additionalFiles={[
+    'CustomResizerNode.jsx',
+    'ResizableNode.jsx',
+    'ResizableNodeSelected.jsx',
+  ]}
+  dependencies={{ '@reactflow/node-resizer': '2.0.0' }}
+/>
+</ExampleLayout>
+
+----
+nodes/stress.mdx
+---
+title: Stress Test
+description: Render hundreds of nodes and edges at once
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+You doubt we can render a lot of nodes and edges? See for yourself.
+
+<ExampleViewer codePath="example-flows/Stress" additionalFiles={['utils.js']} />
+</ExampleLayout>
+
+----
+nodes/easy-connect.mdx
+---
+title: Easy Connect
+description: Make the whole node into a handle
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+  Fed up with tiny little connection handles? Make your whole node act as one!
+  Keep in mind though that you need to define seperate drag handles in this case
+  to still be able to drag the node.
+  <ExampleViewer
+    codePath="example-flows/EasyConnect"
+    additionalFiles={[
+      'CustomNode.jsx',
+      'FloatingEdge.jsx',
+      'CustomConnectionLine.jsx',
+      'utils.js',
+      'style.css',
+    ]}
+  />
+</ExampleLayout>
+
+----
+nodes/connection-limit.mdx
+---
+title: Connection Limit
+description: Use the `isConnectable` prop to limit the number of connections a handle can have
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This is an example of a custom node with a custom handle that can limit the amount of connections a handle can have using the `isConnectable` prop.
+You can use a boolean, a number (the number of max. connections the handle should have) or a callback function that returns a boolean
+as an arg for the `isConnectable` prop of the CustomHandle component.
+
+<ExampleViewer
+  codePath="example-flows/ConnectionLimit"
+  additionalFiles={['CustomNode.jsx', 'CustomHandle.jsx']}
+/>
+</ExampleLayout>
+
+----
+nodes/custom-node.mdx
+---
+title: Custom Nodes
+description: Display any content inside of a node
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Creating your own nodes is as easy as creating a regular React component and passing them to `nodeTypes`. Being just regular components, you can essentially display any content and implement any functionality you like. Inside, you have access to a number of props that let you implement and extend default node behaviour.
+
+<ExampleViewer
+  codePath="example-flows/CustomNode"
+  additionalFiles={['ColorSelectorNode.jsx', 'index.css']}
+/>
+</ExampleLayout>
+
+----
+nodes/add-node-on-edge-drop.mdx
+---
+title: Add Node On Edge Drop
+description: A new node appears wherever you drop the connection line
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+You can create a new node when you drop the connection line on the pane by using the `onConnectStart` and `onConnectEnd` handlers.
+
+<ExampleViewer
+  codePath="example-flows/AddNodeOnEdgeDrop"
+  additionalFiles={['index.css']}
+/>
+</ExampleLayout>
+
+----
+nodes/drag-handle.mdx
+---
+title: Drag Handle
+description: Restrict dragging to a specific part of node
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+You can restrict dragging to a specific part of node, by specifiying a class that will act as a [`dragHandle`](/api-reference/types/node).
+
+<ExampleViewer
+  codePath="example-flows/DragHandle"
+  additionalFiles={['DragHandleNode.jsx']}
+/>
+</ExampleLayout>
+
+----
+layout/elkjs.mdx
+---
+title: Elkjs Tree
+description: For a more powerful alternative to dagre, you can also use elkjs to layout your graphs
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Like our [dagre example](/examples/layout/dagre), this example shows how you can integrate [elkjs](https://github.com/kieler/elkjs) with React Flow for more advanced tree layouts. The code for this example builds a similar tree to the dagre example, but you can look at the reference [here](https://www.eclipse.org/elk/reference.html) to see what you can configure (hint: it's a lot).
+
+<ExampleViewer
+  codePath="example-flows/ElkjsTree"
+  additionalFiles={['nodes-edges.js']}
+  dependencies={{ elkjs: 'latest' }}
+/>
+</ExampleLayout>
+
+----
+layout/_meta.json
+{
+  "sub-flows": "Sub Flow",
+  "horizontal": "Horizontal Flow",
+  "dagre": "Dagre Tree",
+  "entitree-flex": "Entitree Flex Tree",
+  "elkjs": "Elkjs Tree",
+  "elkjs-multiple-handles": "Elkjs Multiple Handles",
+  "auto-layout": "Auto Layout",
+  "force-layout": "Force Layout",
+  "expand-collapse": "Expand and Collapse",
+  "workflow-builder": "Workflow Builder"
+}
+
+----
+layout/horizontal.mdx
+---
+title: Horizontal Flow
+hide_table_of_contents: true
+description: A diagram that flows from left to right
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+A diagram can go from left to right or from top to bottom, but you can also create mixed ones.
+For controlling the direction of a diagram you can adjust the handle positions of a node with the [`sourcePosition` and `targetPosition`](/api-reference/types/node) props.
+
+<ExampleViewer codePath="example-flows/Horizontal" />
+</ExampleLayout>
+
+----
+layout/expand-collapse.mdx
+---
+title: Expand and Collapse
+description: Click on parent nodes to toggle the visibility of their children
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Interactive example to demonstrate how you can navigate hierarchical data structures. You can click on a node to toggle its child nodes and animate the layout changes.
+
+<ProExampleViewer slug="expand-collapse" />
+
+### About this Pro Example
+
+- Once subscribed, you'll get access to **two different versions** of this example: One using [d3-hierarchy](https://github.com/d3/d3-hierarchy) and the
+  other one using [dagre.js](https://github.com/dagrejs/dagre) as a layout
+  engine.
+- The animation can be switched off easily and is implemented using [d3-timer](https://www.npmjs.com/package/d3-timer)
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow), [d3-hierarchy](https://www.npmjs.com/package/d3-hierarchy), [d3-timer](https://www.npmjs.com/package/d3-timer)
+
+</ExampleLayout>
+
+----
+layout/elkjs-multiple-handles.mdx
+---
+title: Elkjs Multiple Handles
+description: Use multiple handles with the elkjs layouting engine to reduce edge crossings
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example demonstrates how to configure [elkjs](https://github.com/kieler/elkjs) to use specific handles (called 'ports' in elkjs). This is helpful to reduce edge crossings and have more control over the layout. The important things to configure are unique ids for the handles / ports, the actual ports for elkjs with a correct side property and `'org.eclipse.elk.portConstraints' : 'FIXED_ORDER'` for all nodes.
+
+<ExampleViewer
+  codePath="example-flows/ElkjsMultiHandle"
+  additionalFiles={['useLayoutNodes.ts', 'nodes.ts', 'edges.ts', 'ElkNode.tsx', 'index.css']}
+  dependencies={{ elkjs: 'latest' }}
+  activeFile="useLayoutNodes.ts"
+/>
+</ExampleLayout>
+
+----
+layout/force-layout.mdx
+---
+title: Force Layout
+description: Newly added nodes never overlap with existing nodes using d3-force
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how you can integrate a [d3 force layout](https://github.com/d3/d3-force) with React Flow. You can customize the layout by setting the strength of the force and the distance between the nodes.
+
+<ProExampleViewer slug="force-layout" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow), [d3-force](https://www.npmjs.com/package/d3-force)
+
+</ExampleLayout>
+
+----
+layout/entitree-flex.mdx
+---
+title: Entitree Flex Tree
+description: Create tree layouts that have sibling nodes and support nodes with different dimensions for family tree type layouts
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how you can integrate [entitree-flex](https://github.com/codeledge/entitree-flex) with React Flow to create tree layouts that can have sibling nodes and support nodes with different dimensions.
+
+<ExampleViewer
+  codePath="example-flows/EntitreeFlexTree"
+  additionalFiles={['nodes-edges.js', 'CustomNode.jsx', 'layout-elements.js']}
+  dependencies={{ 'entitree-flex': 'latest' }}
+/>
+</ExampleLayout>
+
+----
+layout/dagre.mdx
+---
+title: Dagre Tree
+description: Integrate dagre js with React Flow to create simple tree layouts
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how you can integrate [dagre.js](https://github.com/dagrejs/dagre) with React Flow to create simple tree layouts. Good alternatives to dagre are [d3-hierarchy](https://github.com/d3/d3-hierarchy) or [elkjs](https://github.com/kieler/elkjs) if you are looking for a more advanced layouting library.
+
+<ExampleViewer
+  codePath="example-flows/DagreTree"
+  additionalFiles={['nodes-edges.js']}
+  dependencies={{ dagre: 'latest' }}
+/>
+</ExampleLayout>
+
+This example is a demonstration of _static_ layouting. If the nodes or edges in
+the graph change, the layout _won't_ recalculate! It is possible to do dynamic
+layouting with dagre (and other libraries), though: see the [auto layout](/examples/layout/auto-layout)
+pro example for an example of this.
+
+----
+layout/auto-layout.mdx
+---
+title: Auto Layout
+description: Automatically arrange nodes after adding items from a sidebar.
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+  This example shows how you can automatically arrange nodes after adding items
+  from a sidebar. This a common UI pattern for workflow editors and lets you
+  create a flow quickly. The layout is calculated every time the graph changes.
+  <ProExampleViewer variant="dark" slug="auto-layout" />
+
+### About this Pro Example
+
+- Once subscribed, you'll get access to **two different versions** of this example: One using [d3-hierarchy](https://github.com/d3/d3-hierarchy) and the
+  other one using [dagre.js](https://github.com/dagrejs/dagre) as a layout
+  engine.
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow), [d3-hierarchy](https://www.npmjs.com/package/d3-hierarchy) or [dagre](https://www.npmjs.com/package/dagre)
+
+</ExampleLayout>
+
+----
+layout/workflow-builder.mdx
+---
+title: Workflow Builder
+description: Add and auto-layout new nodes in a vertical tree flow
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example can lead as a starting point for your workflow builder app. It includes different ways to add new nodes, such as placeholders or through buttons on the edges.
+
+<ProExampleViewer slug="workflow-builder" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow), [d3-hierarchy](https://www.npmjs.com/package/d3-hierarchy)
+
+</ExampleLayout>
+
+----
+layout/sub-flows.mdx
+---
+title: Sub Flow
+description: Render nested graphs and group nodes, and configure the behavior of child nodes
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+React Flow supports rendering nested graphs and grouping of nodes. You can configure the behaviour of the child nodes using `extent: 'parent'` and render group elements without handles by passing `type: 'group'` to the node configuration. See our [Sub Flow guide](/learn/layouting/sub-flows) for more information.
+
+<ExampleViewer codePath="example-flows/SubFlows" />
+</ExampleLayout>
+
+----
+styling/_meta.json
+{
+  "styled-components": "Styled Components",
+  "tailwind": "Tailwind",
+  "turbo-flow": "Turbo Flow",
+  "base-style": "Base Style"
+}
+
+----
+styling/styled-components.mdx
+---
+title: Styled Components
+description: Change the color of the background and nodes with the Styled Components library
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+In this example we are using [styled components](https://styled-components.com/) to show how to implement a dark and light mode.
+
+<ExampleViewer
+  codePath="example-flows/StyledComponents"
+  additionalFiles={['CustomNode.jsx', 'theme.js', 'nodes-edges.js']}
+  dependencies={{
+    'styled-components': 'latest',
+  }}
+/>
+</ExampleLayout>
+
+----
+styling/tailwind.mdx
+---
+title: Tailwind
+description: Use Tailwind CDN to easily make nice looking flows
+---
+
+import { Callout } from 'nextra/components';
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+In this example we are using [Tailwind](https://tailwindcss.com/) for styling the flow.
+
+<Callout type="warning">
+  We are using the Tailwind CDN for this example. Because of a [bug](https://github.com/codesandbox/sandpack/issues/624)
+  with SandPack, opening the sandbox below will not have the script added to the
+  HTML document. To make sure the example works correctly, make sure you add
+  `<script src="https://cdn.tailwindcss.com"></script>` to the HTML document
+  in `public/index.html` manually.
+
+If you are copying the example locally, you will likely have Tailwind set up
+differently, and can ignore this warning.
+
+</Callout>
+
+<ExampleViewer
+  codePath="example-flows/Tailwind"
+  additionalFiles={['CustomNode.jsx', 'tailwind-config.js']}
+  activeFile="CustomNode.jsx"
+  sandpackOptions={{
+    externalResources: ['https://cdn.tailwindcss.com'],
+  }}
+/>
+</ExampleLayout>
+
+----
+styling/turbo-flow.mdx
+---
+title: Turbo Flow
+description: Nodes with glowing animated gradient borders, inspired by the turbo.build website
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Every part of the React Flow UI is customizable. As the name implies the look is taken from the beautiful [turbo.build](https://turbo.build/pack/docs/core-concepts#function-level-caching) website. You can find more information about custom styles in the [theming guide](/learn/customization/theming). (React Flow uses Turborepo and we love it 💜)
+
+<ExampleViewer
+  codePath="example-flows/TurboStyle"
+  additionalFiles={[
+    'index.css',
+    'TurboNode.tsx',
+    'TurboEdge.tsx',
+    'FunctionIcon.tsx',
+  ]}
+  dependencies={{
+    'react-icons': 'latest',
+  }}
+  isTypescript
+  sandpackOptions={{
+    externalResources: ['https://code.cdn.mozilla.net/fonts/fira.css'],
+  }}
+/>
+</ExampleLayout>
+
+----
+styling/base-style.mdx
+---
+title: Base Style
+description: Show the bare-bones base style that is built into React Flow, but is not used by default
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+React Flow comes with a default style and a base style. This example shows how the base style looks. The base style is mandatory for every flow to work.
+You can find more information in the [theming guide](/learn/customization/theming).
+
+<ExampleViewer codePath="example-flows/BaseStyle" />
+</ExampleLayout>
+
+----
+styling/dark-mode.mdx
+---
+title: Dark Mode
+description: React Flow comes with a color mode prop that allows you to switch between dark, light and system mode.
+created_at: 2024-07-09
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+React Flow comes with a built-in light & dark mode. You can set the [`colorMode`](/api-reference/react-flow#colorMode) prop that allows you to switch between `'dark'`, `'light'` and `'system'`.
+
+<ExampleViewer codePath="example-flows/DarkMode"  isTypescript />
+</ExampleLayout>
+
+----
+edges/_meta.json
+{
+  "custom-edges": "Custom Edges",
+  "edge-types": "Edge Types",
+  "editable-edge": "Editable Edge",
+  "reconnect-edge": "Reconnect Edge",
+  "custom-connectionline": "Connection Line",
+  "multi-connection-line": "Multi Connection Line",
+  "markers": "Edge Markers",
+  "delete-edge-on-drop": "Delete Edge on Drop",
+  "floating-edges": "Floating Edges",
+  "simple-floating-edges": "Simple Floating Edges",
+  "edge-label-renderer": "Edge Label Renderer"
+}
+
+----
+edges/editable-edge.mdx
+---
+title: Editable Edge
+description: Implement a custom edge with draggable control points to change the path of an edge
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example explains how to implement a routable and editable edge with draggable control points to change the path of an edge. It also includes a custom connection line that can be used to draw a freeform edge. For this you need to press "Space" while doing a connection.
+
+<ProExampleViewer variant="dark" slug="editable-edge" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow)
+
+</ExampleLayout>
+
+----
+edges/multi-connection-line.mdx
+---
+title: Multi Connection Line
+description: Draw multiple connection lines at once from any selected nodes.
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+import { Callout } from 'nextra/components';
+
+<ExampleLayout>
+
+React Flow typically only allows one connection to be created at a time. This
+example builds on the [custom connection line](/examples/edges/custom-connectionline)
+example to show how to draw multiple connection lines from any selected nodes at
+once.
+
+<Callout type="info">
+  Pay attention to the `onConnect` handler. If you forget to include this then
+  only one connection will be created even if you have multiple selected nodes!
+</Callout>
+
+<ExampleViewer
+  codePath="example-flows/MultiConnectionLine"
+  additionalFiles={['ConnectionLine.jsx']}
+/>
+
+<Callout type="warning">
+  This example makes use of the special `internalsSymbol` to access properties
+  on a node you won't typically need access to. Properties hidden behind this
+  symbol don't have the same stability guarantees as the public API, so use them
+  with caution.
+</Callout>
+
+</ExampleLayout>
+
+----
+edges/reconnect-edge.mdx
+---
+title: Reconnect Edge
+description: Click-drag to move an existing edge from one handle to another
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+An edge is reconnectable by dragging it to another handle if you are using the
+[`onReconnect` handler prop](/api-reference/react-flow#edges). The handler gets
+called after the edge gets dropped to a new handle. You can use the
+[`reconnectEdge`](/api-reference/utils/reconnect-edge) helper function to update your
+edges state accordingly.
+
+<ExampleViewer codePath="example-flows/EdgeReconnect" />
+
+A couple of properties interact with one another to determine whether an edge is
+updatable or not:
+
+- By default the [`edgesReconnectable`](/api-reference/react-flow#edgesReconnectable) is
+  set to `true`.
+
+- For edges to actually be draggable, though, it is also necessary to define a
+  [`onReconnect`](/api-reference/react-flow#onReconnect) handler.
+
+- Individual edges can refine or override the [`edgesReconnectable`](/api-reference/react-flow#edgesReconnectable)
+  prop by setting their [`updatable`](/api-reference/types/edge#updatable) property.
+
+  - `true` means the edge is updatable even if [`edgesReconnectable`](/api-reference/react-flow#edgesReconnectable)
+
+  - `"source"` or `"target"` means the edge is updatable only from the source or
+    target handle regardless of the [`edgesReconnectable`](/api-reference/react-flow#edgesReconnectable) prop.
+
+  - `false` means the edge is not updatable even if [`edgesReconnectable`](/api-reference/react-flow#edgesReconnectable)
+    is set to `true`.
+
+</ExampleLayout>
+
+----
+edges/markers.mdx
+---
+sidebar_position: 3
+title: Edge Markers
+hide_table_of_contents: true
+description: Make your edges into arrows, add custom icons, or SVGs
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+React Flow has built-in support for different marker types for your edges. It's possible to add your own [SVG markers](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/marker), too.
+
+<ExampleViewer codePath="example-flows/Markers" />
+</ExampleLayout>
+
+----
+edges/delete-edge-on-drop.mdx
+---
+title: Delete Edge on Drop
+description: Delete an edge when it doesn't find a handle
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+In this example we are showing how to delete an edge by using the [`onReconnect`, `onReconnectStart` and `onReconnectEnd` handlers](/api-reference/react-flow#onReconnect). If you drag an existing edge and drop it on the pane, it gets deleted from the `edges` array.
+
+<ExampleViewer codePath="example-flows/DeleteEdgeDrop" />
+</ExampleLayout>
+
+----
+edges/simple-floating-edges.mdx
+---
+sidebar_position: 6
+title: Simple Floating Edges
+description: Edges connect to the closest available handle
+hide_table_of_contents: true
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This is a simplified version of the [Floating Edges](/examples/edges/floating-edges) example. It's not as flexible as the floating edges example, but the edges stick to the top, right, bottom or left side of the nodes. You can find the implementation details in the utils.js file.
+
+<ExampleViewer
+  codePath="example-flows/SimpleFloatingEdges"
+  additionalFiles={[
+    'SimpleFloatingEdge.jsx',
+    'CustomNode.jsx',
+    'utils.js',
+    'index.css',
+  ]}
+/>
+</ExampleLayout>
+
+----
+edges/floating-edges.mdx
+---
+sidebar_position: 5
+title: Floating Edges
+hide_table_of_contents: true
+description: Instead of having the handle at a fixed point, let it move with the connected edge
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This is an example implementation for floating edges. The source and target position of the edges are getting calculated dynamically. You can find the implementation details in the utils.js file.
+
+<ExampleViewer
+  codePath="example-flows/FloatingEdges"
+  additionalFiles={[
+    'FloatingEdge.jsx',
+    'FloatingConnectionLine.jsx',
+    'utils.js',
+    'index.css',
+  ]}
+/>
+</ExampleLayout>
+
+----
+edges/custom-edges.mdx
+---
+sidebar_position: 0
+title: Custom Edges
+description: Create edges with special routing or controls along the edge
+hide_table_of_contents: true
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+React Flow comes with four different edge types - `default` (bezier), `straight`, `step` and `smoothstep`. It's also possible to create a [custom edge](/api-reference/types/edge-props), if you need special edge routing or controls at the edge. In this example we are demonstrating how to implement an edge with a button, a bi-directional edge, a self connecting edge. In all examples we are using the [BaseEdge](/api-reference/components/base-edge) component as a helper.
+
+<ExampleViewer
+  codePath="example-flows/CustomEdge"
+  additionalFiles={[
+    'ButtonEdge.tsx',
+    'SelfConnectingEdge.tsx',
+    'BiDirectionalEdge.tsx',
+    'BiDirectionalNode.tsx',
+    'buttonedge.css',
+  ]}
+  activeFile="ButtonEdge.tsx"
+  isTypescript
+/>
+</ExampleLayout>
+
+----
+edges/edge-label-renderer.mdx
+---
+sidebar_position: 8
+title: Edge Label Renderer
+hide_table_of_contents: true
+description: Render edge labels as divs on top of edges
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+If you want to escape SVG world within an edge, you can use the [`<EdgeLabelRenderer />`](/api-reference/components/edge-label-renderer). It's a portal component that lets you render edge labels as divs on top of the edges. If you want to add mouse interactions you need to set `pointer-events: all` on the label.
+
+<ExampleViewer
+  codePath="example-flows/EdgeRenderer"
+  additionalFiles={['CustomEdge.tsx', 'CustomEdgeStartEnd.tsx']}
+  isTypescript
+/>
+</ExampleLayout>
+
+----
+edges/custom-connectionline.mdx
+---
+title: Connection Line
+description: Change the appearance and behavior of the connection line
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+A Connection Line is what you see when you click and drag out from a handle. It represents a possible edge and can snap to valid handles in close proximity.
+You can implement your own Connection Line by passing a React component rendering the line. You can find the passed props in the [custom connection line docs](/api-reference/types/connection-line-component-props).
+
+<ExampleViewer
+  codePath="example-flows/CustomConnectionLine"
+  additionalFiles={['ConnectionLine.jsx', 'CustomNode.jsx']}
+/>
+</ExampleLayout>
+
+----
+edges/edge-types.mdx
+---
+sidebar_position: 2
+title: Edge Types
+hide_table_of_contents: true
+description: Make edges straight, stepped, smooth-stepped, or bezier curved
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+You can choose different kinds of [edge types](/api-reference/react-flow#edgeTypes) in React Flow: `default` (bezier), `straight`, `step` and `smoothstep`. As you can see, you can define a type for each edge and mix them in one graph.
+
+<ExampleViewer codePath="example-flows/EdgeTypes" additionalFiles={['utils.js']} />
+</ExampleLayout>
+
+----
+interaction/_meta.json
+{
+  "interaction-props": "Interaction Props",
+  "drag-and-drop": "Drag and Drop",
+  "computing-flows": "Computing Flows",
+  "validation": "Validation",
+  "prevent-cycles": "Preventing Cycles",
+  "undo-redo": "Undo and Redo",
+  "copy-paste": "Copy and Paste",
+  "helper-lines": "Helper Lines",
+  "touch-device": "Touch Device",
+  "save-and-restore": "Save and Restore",
+  "collision-detection": "Collision Detection",
+  "zoom-transitions": "Zoom Transitions",
+  "collaborative": "Collaborative",
+  "contextual-zoom": "Contextual Zoom"
+}
+
+----
+interaction/copy-paste.mdx
+---
+title: Copy and Paste
+description: Select nodes and edges to cut, copy, and paste
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example demonstrates how to copy and paste nodes and edges within a React Flow graph. Try using Shift + click + drag to select multiple nodes to copy.
+
+<ProExampleViewer slug="copy-paste" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow)
+
+</ExampleLayout>
+
+----
+interaction/computing-flows.mdx
+---
+title: Computing Flows
+description: This examples demonstrates how to use the helpers to handle data flow
+created_at: 2024-07-09
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to use the computing flow helpers `useNodesData`, `useHandleConnections` and `updateNode`. You can find more detailed information about this in the [computing flows guide](/learn/advanced-use/computing-flows)
+
+<ExampleViewer
+  codePath="example-flows/ComputingFlows"
+  additionalFiles={[
+    'ResultNode.tsx',
+    'TextNode.tsx',
+    'UppercaseNode.tsx',
+    'utils.ts',
+  ]}
+  isTypescript
+/>
+
+</ExampleLayout>
+
+----
+interaction/drag-and-drop.mdx
+---
+sidebar_position: 2
+title: Drag and Drop
+description: Drag and drop outside of the React Flow pane with native HTML Drag and Drop API or react-draggable.
+hide_table_of_contents: true
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+A drag and drop user interface is very common for node-based workflow editors. The drag and drop behaviour outside of the React Flow pane is not built in but can be implemented with the native [HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) (used in this example) or a third party library like [react-draggable](https://github.com/react-grid-layout/react-draggable).
+
+<ExampleViewer
+  codePath="example-flows/DragNDrop"
+  additionalFiles={['Sidebar.jsx', 'index.css']}
+/>
+</ExampleLayout>
+
+----
+interaction/zoom-transitions.mdx
+---
+sidebar_position: 8
+title: Zoom Transitions
+hide_table_of_contents: true
+description: Change the animation speed when the viewport is zoomed or moved
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Smooth transitions from one viewport to another are built-in. You can pass a `duration` option parameter to define the animation duration for every function that alters the viewport ([`zoomIn`, `zoomOut`, `zoomTo`, `setViewport`, `fitView`, `setCenter`, `fitBounds`](/api-reference/types/react-flow-instance#viewport)).
+
+<ExampleViewer codePath="example-flows/ZoomTransitions" />
+</ExampleLayout>
+
+----
+interaction/collaborative.mdx
+---
+title: Collaborative
+description: Build a collaborative graph for multiple users with React Flow and yjs
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to build a collaborative graph for multiple users with React Flow and [yjs](https://github.com/yjs/yjs). The changes made in this graph are visible for all users on this page. To see it working, you can [open this page in another tab](/examples/interaction/collaborative) or on another device or browser.
+The example can be used as a starting point to build multi user flows and editors.
+
+<ProExampleViewer slug="collaborative" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow), [yjs](https://www.npmjs.com/package/yjs)
+
+</ExampleLayout>
+
+----
+interaction/collision-detection.mdx
+---
+sidebar_position: 7
+title: Collision Detection
+hide_table_of_contents: true
+description: Find out if two nodes overlap each other
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows a simple method to find out if two nodes overlap each other. It can be useful for interactively grouping or connecting nodes.
+
+<ExampleViewer
+  codePath="example-flows/CollisionDetection"
+  additionalFiles={['initial-elements.js', 'style.css']}
+/>
+</ExampleLayout>
+
+----
+interaction/save-and-restore.mdx
+---
+sidebar_position: 6
+title: Save and Restore
+hide_table_of_contents: true
+description: Save the state of the diagram, and reload it after refreshing the page
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+If you want to save and restore a flow you can use the [`toObject` function](/api-reference/types/react-flow-instance#to-object) of the React Flow instance or your local nodes and edges state.
+In this example you can move nodes around, add ones and save the diagram. Then reload the page and click restore to restore your diagram.
+
+<ExampleViewer codePath="example-flows/SaveRestore" />
+</ExampleLayout>
+
+----
+interaction/helper-lines.mdx
+---
+title: Helper Lines
+description: Display lines that help to visually align nodes, and enable nodes to be snapped into place when dropped
+is_pro_example: true
+is_free: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example demonstrates how to display helper lines in a React Flow graph while a node is being dragged.
+
+<ProExampleViewer slug="helper-lines" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow)
+
+</ExampleLayout>
+
+----
+interaction/interaction-props.mdx
+---
+sidebar_position: 1
+title: Interaction Props
+hide_table_of_contents: true
+description: The most popular props used for interactivity of a diagram
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows the different props like `nodesDraggable`, `zoomOnScroll` or `panOnDrag` that control the interactivity of a diagram. You can find a list with all props that can be used to manage the interactivity in the [interaction props section](/api-reference/react-flow#interaction).
+
+<ExampleViewer codePath="example-flows/Interaction" />
+</ExampleLayout>
+
+----
+interaction/prevent-cycles.mdx
+---
+title: Preventing Cycles
+hide_table_of_contents: true
+description: Check if a new connection would cause a cycle in the graph
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+
+In the [validation](/examples/interaction/validation) example, we saw how to use
+the [`isValidConnection`](/api-reference/react-flow#is-valid-connection) callback
+to prevent certain connections from being created. This example shows how to use
+the [`getOutgoers`](/api-reference/utils/get-outgoers) util to check if a new
+connection would cause a cycle in the flow.
+
+<ExampleViewer
+  codePath="example-flows/PreventConnectionCycles"
+  additionalFiles={['nodes-edges.js']}
+/>
+
+</ExampleLayout>
+
+----
+interaction/undo-redo.mdx
+---
+title: Undo and Redo
+description: Implement an undo and redo functionality for moving, adding, and deleting nodes and edges
+is_pro_example: true
+---
+
+import ProExampleViewer from '@/components/pro-example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how to implement a simple undo and redo functionality for a React Flow graph.
+
+<ProExampleViewer slug="undo-redo" />
+
+### About this Pro Example
+
+- Dependencies: [reactflow](https://www.npmjs.com/package/reactflow)
+
+</ExampleLayout>
+
+----
+interaction/context-menu.mdx
+---
+title: Context Menu
+description: Right-click a node to display custom actions
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+The [onNodeContextMenu](/api-reference/react-flow#event-onnodecontextmenu?) event can be used to show a custom menu when right-clicking a node. This example shows a simple menu with buttons to duplicate or delete the clicked node.
+
+<ExampleViewer
+  codePath="example-flows/ContextMenu"
+  additionalFiles={["ContextMenu.jsx", "nodes-edges.js", "style.css"]}
+/>
+</ExampleLayout>
+
+----
+interaction/validation.mdx
+---
+sidebar_position: 3
+title: Validation
+hide_table_of_contents: true
+description: Check if a new connection is valid and should be added
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+Custom nodes need to have at least one [`Handle` component](/api-reference/components/handle) to be connectable. You can pass a validation function [`isValidConnection`](/api-reference/react-flow#isvalidconnection-1) to the ReactFlow component in order to check if a new connection is valid and should be added.
+
+<ExampleViewer
+  codePath="example-flows/Validation"
+  additionalFiles={['index.css']}
+/>
+</ExampleLayout>
+
+----
+interaction/touch-device.mdx
+---
+sidebar_position: 5
+title: Touch Device
+hide_table_of_contents: true
+description: Tap two handles to connect them, and make handles bigger for smaller devices
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+You can connect nodes on a touch device by tapping two handles in a row. In this example we increased the size of the handles so that they are better tappable. You can disable this behavoir by setting the [`connectOnClick` prop](/api-reference/react-flow#interaction) to `false`.
+
+<ExampleViewer
+  codePath="example-flows/TouchDevice"
+  additionalFiles={['index.css']}
+/>
+</ExampleLayout>
+
+----
+interaction/contextual-zoom.mdx
+---
+sidebar_position: 10
+title: Contextual Zoom
+hide_table_of_contents: true
+description: Only display the content of a node when you are zoomed in close enough
+---
+
+import ExampleViewer from '@/components/example-viewer';
+import ExampleLayout from '@/layouts/example-with-frontmatter';
+
+<ExampleLayout>
+This example shows how the current zoom level can be used by a node to decide which content to show.
+We are using selecting the zoom via the [`useStore` hook](/api-reference/hooks/use-store) to update our custom node whenever the zoom changes.
+
+<ExampleViewer
+  codePath="example-flows/ContextualZoom"
+  additionalFiles={['ZoomNode.jsx', 'index.css']}
+/>
+</ExampleLayout>
+
+--END--

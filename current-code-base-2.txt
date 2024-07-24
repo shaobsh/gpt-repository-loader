@@ -1,0 +1,675 @@
+The following text is a Git repository with code. The structure of the text are sections that begin with ----, followed by a single line containing the file path and file name, followed by a variable amount of lines containing the file contents. The text representing the Git repository ends when the symbols --END-- are encounted. Any further text beyond --END-- are meant to be interpreted as instructions using the aforementioned Git repository as context.
+----
+next.config.js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+    reactStrictMode: true,
+    webpack: (config, { isServer }) => {
+        if (!isServer) {
+            config.resolve.fallback = {
+                ...config.resolve.fallback,
+                d3: false,
+            };
+        }
+        return config;
+    },
+};
+
+module.exports = nextConfig;
+----
+next-env.d.ts
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.
+
+----
+tsconfig.json
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+
+----
+.eslintrc.json
+{
+  "extends": "next/core-web-vitals"
+}
+
+----
+public/vercel.svg
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 283 64"><path fill="black" d="M141 16c-11 0-19 7-19 18s9 18 20 18c7 0 13-3 16-7l-7-5c-2 3-6 4-9 4-5 0-9-3-10-7h28v-3c0-11-8-18-19-18zm-9 15c1-4 4-7 9-7s8 3 9 7h-18zm117-15c-11 0-19 7-19 18s9 18 20 18c6 0 12-3 16-7l-8-5c-2 3-5 4-8 4-5 0-9-3-11-7h28l1-3c0-11-8-18-19-18zm-10 15c2-4 5-7 10-7s8 3 9 7h-19zm-39 3c0 6 4 10 10 10 4 0 7-2 9-5l8 5c-3 5-9 8-17 8-11 0-19-7-19-18s8-18 19-18c8 0 14 3 17 8l-8 5c-2-3-5-5-9-5-6 0-10 4-10 10zm83-29v46h-9V5h9zM37 0l37 64H0L37 0zm92 5-27 48L74 5h10l18 30 17-30h10zm59 12v10l-3-1c-6 0-10 4-10 10v15h-9V17h9v9c0-5 6-9 13-9z"/></svg>
+----
+public/next.svg
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 394 80"><path fill="#000" d="M262 0h68.5v12.7h-27.2v66.6h-13.6V12.7H262V0ZM149 0v12.7H94v20.4h44.3v12.6H94v21h55v12.6H80.5V0h68.7zm34.3 0h-17.8l63.8 79.4h17.9l-32-39.7 32-39.6h-17.9l-23 28.6-23-28.6zm18.3 56.7-9-11-27.1 33.7h17.8l18.3-22.7z"/><path fill="#000" d="M81 79.3 17 0H0v79.3h13.6V17l50.2 62.3H81Zm252.6-.4c-1 0-1.8-.4-2.5-1s-1.1-1.6-1.1-2.6.3-1.8 1-2.5 1.6-1 2.6-1 1.8.3 2.5 1a3.4 3.4 0 0 1 .6 4.3 3.7 3.7 0 0 1-3 1.8zm23.2-33.5h6v23.3c0 2.1-.4 4-1.3 5.5a9.1 9.1 0 0 1-3.8 3.5c-1.6.8-3.5 1.3-5.7 1.3-2 0-3.7-.4-5.3-1s-2.8-1.8-3.7-3.2c-.9-1.3-1.4-3-1.4-5h6c.1.8.3 1.6.7 2.2s1 1.2 1.6 1.5c.7.4 1.5.5 2.4.5 1 0 1.8-.2 2.4-.6a4 4 0 0 0 1.6-1.8c.3-.8.5-1.8.5-3V45.5zm30.9 9.1a4.4 4.4 0 0 0-2-3.3 7.5 7.5 0 0 0-4.3-1.1c-1.3 0-2.4.2-3.3.5-.9.4-1.6 1-2 1.6a3.5 3.5 0 0 0-.3 4c.3.5.7.9 1.3 1.2l1.8 1 2 .5 3.2.8c1.3.3 2.5.7 3.7 1.2a13 13 0 0 1 3.2 1.8 8.1 8.1 0 0 1 3 6.5c0 2-.5 3.7-1.5 5.1a10 10 0 0 1-4.4 3.5c-1.8.8-4.1 1.2-6.8 1.2-2.6 0-4.9-.4-6.8-1.2-2-.8-3.4-2-4.5-3.5a10 10 0 0 1-1.7-5.6h6a5 5 0 0 0 3.5 4.6c1 .4 2.2.6 3.4.6 1.3 0 2.5-.2 3.5-.6 1-.4 1.8-1 2.4-1.7a4 4 0 0 0 .8-2.4c0-.9-.2-1.6-.7-2.2a11 11 0 0 0-2.1-1.4l-3.2-1-3.8-1c-2.8-.7-5-1.7-6.6-3.2a7.2 7.2 0 0 1-2.4-5.7 8 8 0 0 1 1.7-5 10 10 0 0 1 4.3-3.5c2-.8 4-1.2 6.4-1.2 2.3 0 4.4.4 6.2 1.2 1.8.8 3.2 2 4.3 3.4 1 1.4 1.5 3 1.5 5h-5.8z"/></svg>
+----
+.idea/jsLibraryMappings.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <includedPredefinedLibrary name="Node.js Core" />
+  </component>
+</project>
+----
+.idea/reactflow-next.iml
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/temp" />
+      <excludeFolder url="file://$MODULE_DIR$/tmp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+----
+.idea/.gitignore
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
+----
+.idea/workspace.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e5bec734-044d-4fd4-ad69-fde77b8d4ce4" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2jaJ9XFqD91gbMLsIPbY4hYohCw" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "javascript.nodejs.core.library.configured.version": "20.15.1",
+    "javascript.nodejs.core.library.typings.version": "20.14.11",
+    "last_opened_file_path": "/Users/fylo/WebstormProjects/reactflow-next",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/Users/fylo/.nvm/versions/node/v20.15.1/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.github.copilot.settings.ApplicationConfigurable",
+    "ts.external.directory.path": "/Users/fylo/WebstormProjects/reactflow-next/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e5bec734-044d-4fd4-ad69-fde77b8d4ce4" name="Changes" comment="" />
+      <created>1721619102270</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721619102270</updated>
+      <workItem from="1721619103313" duration="14537000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/ForceDirectedFlow.tsx</url>
+          <line>10</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
+----
+.idea/modules.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/reactflow-next.iml" filepath="$PROJECT_DIR$/.idea/reactflow-next.iml" />
+    </modules>
+  </component>
+</project>
+----
+src/app/layout.tsx
+import './globals.css'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import '@xyflow/react/dist/style.css';
+
+
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Create Next App',
+  description: 'Generated by create next app',
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
+  )
+}
+
+----
+src/app/page.tsx
+"use client";
+
+import React from 'react';
+import { ReactFlowProvider } from '@xyflow/react';
+import ForceDirectedFlow from '../components/ForceDirectedFlow';
+
+export default function Home() {
+    return (
+        <ReactFlowProvider>
+            <ForceDirectedFlow />
+        </ReactFlowProvider>
+    );
+}
+----
+src/app/globals.css
+:root {
+  --max-width: 1100px;
+  --font-mono: ui-monospace, Menlo, Monaco;
+
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+----
+src/components/.DS_Store
+   Bud1           	                                                           slg1Scomp                                                                                                                                                                                                                                                                                                                                                                                                                                             e d g e slg1Scomp          e d g e smoDDblob   Mi'A    e d g e smodDblob   Mi'A    e d g e sph1Scomp            n o d e slg1Scomp          n o d e smoDDblob   Mi'A    n o d e smodDblob   Mi'A    n o d e sph1Scomp                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @                                              @                                                @                                                @                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   E  	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       DSDB                                 `                                                   @                                                @                                                @                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+----
+src/components/Flow.tsx
+import { useCallback } from "react";
+import {
+  Background,
+  Controls,
+  MiniMap,
+  ReactFlow,
+  addEdge,
+  useNodesState,
+  useEdgesState,
+  type OnConnect,
+} from "@xyflow/react";
+
+import "@xyflow/react/dist/style.css";
+
+import { initialNodes, nodeTypes, type CustomNodeType } from "./nodes";
+import { initialEdges, edgeTypes, type CustomEdgeType } from "./edges";
+
+export default function App() {
+  const [nodes, , onNodesChange] = useNodesState<CustomNodeType>(initialNodes);
+  const [edges, setEdges, onEdgesChange] =
+    useEdgesState<CustomEdgeType>(initialEdges);
+  const onConnect: OnConnect = useCallback(
+    (connection) => setEdges((edges) => addEdge(connection, edges)),
+    [setEdges]
+  );
+
+  return (
+    <ReactFlow<CustomNodeType, CustomEdgeType>
+      nodes={nodes}
+      nodeTypes={nodeTypes}
+      onNodesChange={onNodesChange}
+      edges={edges}
+      edgeTypes={edgeTypes}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
+      fitView
+    >
+      <Background />
+      <MiniMap />
+      <Controls />
+    </ReactFlow>
+  );
+}
+
+----
+src/components/ForceDirectedFlow.tsx
+"use client";
+
+import React, { useCallback, useEffect } from 'react';
+import { ReactFlow, MiniMap, Controls, Background, useNodesState, useEdgesState, addEdge, Node, Edge, useReactFlow } from '@xyflow/react';
+
+import useForceLayout from '../hooks/useForceLayout';
+
+const initialNodes = [
+    { id: '1', data: { label: 'Node 1' }, position: { x: 0, y: 0 } },
+    { id: '2', data: { label: 'Node 2' }, position: { x: 100, y: 100 } },
+    { id: '3', data: { label: 'Node 3' }, position: { x: 200, y: 200 } },
+];
+
+const initialEdges = [
+    { id: 'e1-2', source: '1', target: '2' },
+    { id: 'e2-3', source: '2', target: '3' },
+];
+
+const ForceDirectedFlow = () => {
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+    const { screenToFlowPosition } = useReactFlow();
+
+    useForceLayout({ strength: -1000, distance: 150 });
+
+    const onConnect = useCallback(
+        (params) => setEdges((eds) => addEdge(params, eds)),
+        [setEdges]
+    );
+
+    const onPaneClick = useCallback(
+        (event) => {
+            const position = screenToFlowPosition({ x: event.clientX, y: event.clientY });
+            const newNode: Node = {
+                id: `${nodes.length + 1}`,
+                data: { label: `Node ${nodes.length + 1}` },
+                position,
+            };
+            setNodes((nds) => nds.concat(newNode));
+        },
+        [nodes, setNodes, screenToFlowPosition]
+    );
+
+    const onNodeClick = useCallback(
+        (_, node) => {
+            const childId = `${nodes.length + 1}`;
+            const childNode: Node = {
+                id: childId,
+                data: { label: `Child of ${node.id}` },
+                position: { x: node.position.x + 100, y: node.position.y + 100 },
+            };
+            const childEdge: Edge = {
+                id: `e${node.id}-${childId}`,
+                source: node.id,
+                target: childId,
+            };
+
+            setNodes((nds) => nds.concat(childNode));
+            setEdges((eds) => eds.concat(childEdge));
+        },
+        [nodes, setNodes, setEdges]
+    );
+
+    // This effect will randomize node positions on component mount
+    useEffect(() => {
+        setNodes((nds) =>
+            nds.map((node) => ({
+                ...node,
+                position: {
+                    x: Math.random() * 500,
+                    y: Math.random() * 500,
+                },
+            }))
+        );
+    }, [setNodes]);
+
+    return (
+        <div style={{ width: '100vw', height: '100vh' }}>
+            <ReactFlow
+                nodes={nodes}
+                edges={edges}
+                onNodesChange={onNodesChange}
+                onEdgesChange={onEdgesChange}
+                onConnect={onConnect}
+                onPaneClick={onPaneClick}
+                onNodeClick={onNodeClick}
+                fitView
+            >
+                <Controls />
+                <MiniMap />
+                <Background variant="dots" gap={12} size={1} />
+            </ReactFlow>
+        </div>
+    );
+};
+
+export default ForceDirectedFlow;
+----
+src/components/nodes/PositionLoggerNode.tsx
+import type { Node, NodeProps } from "@xyflow/react";
+import { Handle, Position } from "@xyflow/react";
+
+export type PositionLoggerNodeData = {
+  label?: string;
+};
+
+export type PositionLoggerNode = Node<PositionLoggerNodeData>;
+
+export default function PositionLoggerNode({
+  positionAbsoluteX,
+  positionAbsoluteY,
+  data,
+}: NodeProps<PositionLoggerNode>) {
+  const x = `${Math.round(positionAbsoluteX)}px`;
+  const y = `${Math.round(positionAbsoluteY)}px`;
+
+  return (
+    // We add this class to use the same styles as React Flow's default nodes.
+    <div className="react-flow__node-default">
+      {data.label && <div>{data.label}</div>}
+
+      <div>
+        {x} {y}
+      </div>
+
+      <Handle type="source" position={Position.Bottom} />
+    </div>
+  );
+}
+
+----
+src/components/nodes/index.ts
+import type { BuiltInNode, Node, NodeTypes } from '@xyflow/react';
+import PositionLoggerNode, {
+  type PositionLoggerNode as PositionLoggerNodeType,
+} from './PositionLoggerNode';
+
+export const initialNodes = [
+  {
+    id: 'a',
+    type: 'input',
+    position: { x: 0, y: 0 },
+    data: { label: 'wire' },
+  },
+  {
+    id: 'b',
+    type: 'position-logger',
+    position: { x: -100, y: 100 },
+    data: { label: 'drag me!' },
+  },
+  { id: 'c', position: { x: 100, y: 100 }, data: { label: 'your ideas' } },
+  {
+    id: 'd',
+    type: 'output',
+    position: { x: 0, y: 200 },
+    data: { label: 'with React Flow' },
+  },
+] satisfies Node[];
+
+export const nodeTypes = {
+  'position-logger': PositionLoggerNode,
+  // Add any of your custom nodes here!
+} satisfies NodeTypes;
+
+// Append the types of you custom edges to the BuiltInNode type
+export type CustomNodeType = BuiltInNode | PositionLoggerNodeType;
+
+----
+src/components/edges/index.ts
+import type { BuiltInEdge, Edge, EdgeTypes } from "@xyflow/react";
+
+import ButtonEdge, { type ButtonEdge as ButtonEdgeType } from "./ButtonEdge";
+
+export const initialEdges = [
+  { id: "a->c", source: "a", target: "c", animated: true },
+  { id: "b->d", source: "b", target: "d", type: "button-edge" },
+  { id: "c->d", source: "c", target: "d", animated: true },
+] satisfies Edge[];
+
+export const edgeTypes = {
+  // Add your custom edge types here!
+  "button-edge": ButtonEdge,
+} satisfies EdgeTypes;
+
+// Append the types of you custom edges to the BuiltInEdge type
+export type CustomEdgeType = BuiltInEdge | ButtonEdgeType;
+
+----
+src/components/edges/ButtonEdge.tsx
+import {
+  BaseEdge,
+  EdgeLabelRenderer,
+  getBezierPath,
+  useReactFlow,
+  type EdgeProps,
+  type Edge,
+} from "@xyflow/react";
+
+const buttonStyle = {
+  width: 20,
+  height: 20,
+  background: "#eee",
+  border: "1px solid #fff",
+  cursor: "pointer",
+  borderRadius: "50%",
+  fontSize: "12px",
+  lineHeight: 1,
+};
+
+type ButtonEdgeData = {};
+
+export type ButtonEdge = Edge<ButtonEdgeData>;
+
+export default function ButtonEdge({
+  id,
+  sourceX,
+  sourceY,
+  targetX,
+  targetY,
+  sourcePosition,
+  targetPosition,
+  style = {},
+  markerEnd,
+}: EdgeProps<ButtonEdge>) {
+  const { setEdges } = useReactFlow();
+  const [edgePath, labelX, labelY] = getBezierPath({
+    sourceX,
+    sourceY,
+    sourcePosition,
+    targetX,
+    targetY,
+    targetPosition,
+  });
+
+  const onEdgeClick = () => {
+    setEdges((edges) => edges.filter((edge) => edge.id !== id));
+  };
+
+  return (
+    <>
+      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
+      <EdgeLabelRenderer>
+        <div
+          style={{
+            position: "absolute",
+            transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
+            fontSize: 12,
+            // everything inside EdgeLabelRenderer has no pointer events by default
+            // if you have an interactive element, set pointer-events: all
+            pointerEvents: "all",
+          }}
+          className="nodrag nopan"
+        >
+          <button style={buttonStyle} onClick={onEdgeClick}>
+            ×
+          </button>
+        </div>
+      </EdgeLabelRenderer>
+    </>
+  );
+}
+
+----
+src/hooks/useForceLayout.ts
+import { useEffect } from 'react';
+import {
+    forceSimulation,
+    forceLink,
+    forceManyBody,
+    forceX,
+    forceY,
+    SimulationNodeDatum,
+    SimulationLinkDatum,
+} from 'd3-force';
+import {
+    useReactFlow,
+    ReactFlowState,
+    useStore,
+    Node,
+    useNodesInitialized,
+} from '@xyflow/react';
+
+type UseForceLayoutOptions = {
+    strength: number;
+    distance: number;
+};
+
+type SimNodeType = SimulationNodeDatum & Node;
+
+const elementCountSelector = (state: ReactFlowState) =>
+    state.nodeLookup.size + state.edges.length;
+
+function useForceLayout({
+                            strength = -1000,
+                            distance = 150,
+                        }: UseForceLayoutOptions) {
+    const elementCount = useStore(elementCountSelector);
+    const nodesInitialized = useNodesInitialized();
+    const { setNodes, getNodes, getEdges } = useReactFlow();
+
+    useEffect(() => {
+        const nodes = getNodes();
+        const edges = getEdges();
+
+        if (!nodes.length || !nodesInitialized) {
+            return;
+        }
+
+        const simulationNodes: SimNodeType[] = nodes.map((node) => ({
+            ...node,
+            x: node.position.x,
+            y: node.position.y,
+        }));
+
+        const simulationLinks: SimulationLinkDatum<SimNodeType>[] = edges.map(
+            (edge) => edge
+        );
+
+        const simulation = forceSimulation()
+            .nodes(simulationNodes)
+            .force('charge', forceManyBody().strength(strength))
+            .force(
+                'link',
+                forceLink(simulationLinks)
+                    .id((d: any) => d.id)
+                    .strength(0.05)
+                    .distance(distance)
+            )
+            .force('x', forceX().x(0).strength(0.08))
+            .force('y', forceY().y(0).strength(0.08))
+            .on('tick', () => {
+                setNodes((nodes) =>
+                    nodes.map((node, i) => {
+                        if (simulationNodes[i]) {
+                            const { x, y } = simulationNodes[i];
+                            if (node.dragging) {
+                                simulationNodes[i].fx = node.position.x;
+                                simulationNodes[i].fy = node.position.y;
+                            }
+                            return { ...node, position: { x: x ?? 0, y: y ?? 0 } };
+                        }
+                        return node;
+                    })
+                );
+            });
+
+        return () => {
+            simulation.stop();
+        };
+    }, [
+        elementCount,
+        getNodes,
+        getEdges,
+        setNodes,
+        strength,
+        distance,
+        nodesInitialized,
+    ]);
+}
+
+export default useForceLayout;
+--END--
